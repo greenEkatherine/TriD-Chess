@@ -23,6 +23,6 @@ public:
 	unsigned short getLevel(){return level;};
 	bool isMovable() {return movable;};
 	void moveBoard(Direction directTo);
-    bool movePiece(size_t oldx, size_t oldy, size_t oldz, size_t newx, size_t newy, size_t newz, Colours col);
+    bool isPossMove(Position3D oldPos, Position3D newPos, const Colours col);
 };
 #endif

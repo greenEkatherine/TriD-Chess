@@ -1,4 +1,5 @@
 #include <typeinfo>
+#include <memory>
 #include "Board.h"
 #include "Pawn.h"
 
@@ -36,46 +37,49 @@ bool Board::moveBoard(size_t oldx, size_t oldy, size_t oldz, size_t newx, size_t
     {
         return false;
     }
-
-
 }
 
-bool Board::movePiece(size_t oldx, size_t oldy, size_t oldz, size_t newx, size_t newy, size_t newz, const Colours col)
+//TODO set Position3D instead coordinates
+bool Board::isPossMove(Position3D oldPos, Position3D newPos, const Colours col)
 {
-    if (((col == WHITE) && (gameSpace[oldx][oldy][oldz] == BLACK_OCCUPIED)
-         || ((col == BLACK) && (gameSpace[oldx][oldy][oldz] == WHITE_OCCUPIED))
+    bool kill = false;
+    //player does not choose his/her piece
+    if (((col == WHITE) && (gameSpace[oldPos._x][oldPos._y][oldPos._z] != WHITE_OCCUPIED))
+         || ((col == BLACK) && (gameSpace[oldPos._x][oldPos._y][oldPos._z] != BLACK_OCCUPIED)))
     {
         return false;
     }
-    if ((gameSpace[oldx][oldy][oldz] == INVALID) || (gameSpace[oldx][oldy][oldz] == EMPTY))
+
+    //chess square is the same or is not present
+    if ((gameSpace[newPos._x][newPos._y][newPos._z] == INVALID) || (gameSpace[newPos._x][newPos._y][newPos._z] == gameSpace[oldPos._x][oldPos._y][oldPos._z]))
     {
         return false;
     }
-    if ((gameSpace[newx][newy][newz] == INVALID) || (gameSpace[newx][newy][newz] == gameSpace[oldx][oldy][oldz]))
+
+    if (gameSpace[newPos._x][newPos._y][newPos._z] != EMPTY)
     {
-        return false;
+        if (gameSpace[newPos._x][newPos._y][newPos._z] == INVALID)
+        {
+            return false;
+        }
+        else if (((col == WHITE) && (gameSpace[newPos._x][newPos._y][newPos._z] != BLACK_OCCUPIED))
+             || ((col == BLACK) && (gameSpace[newPos._x][newPos._y][newPos._z] != WHITE_OCCUPIED))) {
+            return false;
+        }
+        else
+        {
+            kill = true;
+        }
     }
-    auto current = actualPieces.find(oldx * SIZE_Y * SIZE_Z + oldy * SIZE_Z + oldz);
+
+    auto current = actualPieces.find(oldPos._x * SIZE_Y * SIZE_Z + oldPos._y * SIZE_Z + oldPos._z);
     if (current != actualPieces.end()) //лишнее условие?
     {
         bool valid = false;
-        std::vector<Position3D> path;
-        current->second->isValidMove(newx, newy, newz, &valid, path);
+        std::unique_ptr<Board> boardState = this;
+        current->second->isValidMove(newPos._x, newPos._y, newPos._z, valid, boardState, kill);
         if (valid)
         {
-            for (Position3D pos : path)
-            {
-                if ((gameSpace.[pos._x][pos._y][pos._z] != EMPTY) &&(gameSpace.[pos._x][pos._y][pos._z - 1] != EMPTY)
-                    && gameSpace.[pos._x][pos._y][pos._z + 1] != EMPTY))
-                {
-                    return false;
-                }
-            }
-            auto looser = actualPieces.find(newx * SIZE_Y * SIZE_Z + newy * SIZE_Z + newz);
-            if ((looser != actualPieces.end()) && (looser->second->getColour != current->second->getColour)) { //второе условие лишнее
-                actualPieces.erase(looser);
-            }
-            current->second->setPosition(newx, newy, newz);
             return true;
         }
     }

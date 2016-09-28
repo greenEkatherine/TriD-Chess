@@ -26,6 +26,8 @@ struct Position3D {
     size_t _x;
     size_t _y;
     size_t _z;
+
+    bool checkBoundaries() { return ((_x < 8) && (_y < 8) && (_z < 7)); };
 };
 
 

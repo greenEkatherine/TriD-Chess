@@ -1,4 +1,3 @@
-#include <cstdlib>
 #include "Rook.h"
 
 Rook::Rook(Colours col,Side sd ) : side(sd)
@@ -23,21 +22,20 @@ Rook::Rook(Colours col,Side sd ) : side(sd)
 	}
 };
 
-void Rook::isValidMove(size_t newx, size_t newy, size_t newz, bool res, std::vector<Position3D>& path)
+void Rook::isValidMove(size_t newx, size_t newy, size_t newz, bool& res, std::unique_ptr<Board> boardState, bool kill)
 {
-	if((newx != x) && (newy != y) && (newz != z))
+    res = false;
+	if((newx == x) xor (newy == y)) //true only if one statement is true
     {
-        res = false;
-    }
-    else
-    {
-        size_t diff = abs(newx - x) + abs(newy - y) + abs(newz - z);
-        path.reserve(diff);
-        for (size_t i = 0; i < diff)
+        if (abs(newz - z) > 1)
         {
-            path.at(i) = Position3D{x != newx ? x + i : x, y != newy ? y + i : y, z != newz ? z + i : z};
+            
         }
-        res = true;
+        size_t diff = abs(newx - x) + abs(newy - y);
+        for (size_t i = 0; i < diff; ++i) {
+
+            path->at(i) = Position3D{x != newx ? x + i : x, y != newy ? y + i : y, z != newz ? z + i : z};
+        }
     }
     return;
 }

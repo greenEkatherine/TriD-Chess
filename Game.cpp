@@ -68,10 +68,13 @@ void Game::moveBoard(size_t oldx, size_t oldy, size_t oldz, size_t newx, size_t 
 
 void Game::movePiece(size_t oldx, size_t oldy, size_t oldz, size_t newx, size_t newy, size_t newz)
 {
-    if (space.movePiece(oldx, oldy, oldz, newx, newy, newz, currentPlayer))
-    {
-        movingHistory.push(Position3D{newx, newy, newz});
-        currentPlayer++;
+    Position3D oldPos = {oldx, oldy, oldz};
+    Position3D newPos = {newx, newy, newz};
+    if (oldPos.checkBoundaries() && newPos.checkBoundaries()) {
+        if (space.isPossMove(oldPos, newPos, currentPlayer)) {
+            movingHistory.push(Position3D{newx, newy, newz});
+            currentPlayer++;
+        }
     }
     return;
 }
