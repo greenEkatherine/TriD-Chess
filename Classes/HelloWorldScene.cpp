@@ -19,7 +19,6 @@ Scene* HelloWorld::createScene()
 	// set parameters for camera
 	camera->setPosition3D(Vec3(0, 100, 100));
 	camera->lookAt(Vec3(0, 0, 0), Vec3(0, 1, 0));
-
 	scene->addChild(camera);*/ //add camera to the scene
 
     // add layer as a child to scene
@@ -27,11 +26,6 @@ Scene* HelloWorld::createScene()
 
     // return the scene
     return scene;
-}
-
-Vec2 onMouseMove(Event *e)
-{
-	return Vec2(e->)
 }
 
 void drawChessPiece(Sprite3D *item, Vec3 position, std::string filetex, float scale)
@@ -185,6 +179,10 @@ bool HelloWorld::init()
 	this->addChild(sprite17, 1);
 	this->addChild(sprite18, 1);
 	this->addChild(sprite19, 1);
+ 
+	/*cocos2d::Vec3 position[8];
+	AABB size = sprite1->getAABB();
+	size.getCorners(position);*/
 
 	/*auto sprite = Sprite::create("HelloWorld.png");
 
