@@ -3,6 +3,13 @@
 
 USING_NS_CC;
 
+#define CC_CALLBACK_2(__selector__,__target__, ...) std::bind(&__selector__,__target__, std::placeholders::_1, std::placeholders::_2, ##__VA_ARGS__)
+
+enum
+{
+	kTagSprite = 1,
+};
+
 Scene* HelloWorld::createScene()
 {
     // 'scene' is an autorelease object
@@ -179,7 +186,12 @@ bool HelloWorld::init()
 	this->addChild(sprite17, 1);
 	this->addChild(sprite18, 1);
 	this->addChild(sprite19, 1);
- 
+
+	auto listener = EventListenerTouchOneByOne::create();
+	listener->onTouchBegan = CC_CALLBACK_2(HelloWorld::onTouchBegan, this);
+	listener->onTouchEnded = CC_CALLBACK_2(HelloWorld::onTouchEnded, this);
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+
 	/*cocos2d::Vec3 position[8];
 	AABB size = sprite1->getAABB();
 	size.getCorners(position);*/
@@ -193,6 +205,20 @@ bool HelloWorld::init()
     this->addChild(sprite, 0);*/
     
     return true;
+}
+
+bool HelloWorld::onTouchBegan(Touch* touch, Event  *event)
+{
+	return true;
+}
+
+void HelloWorld::onTouchEnded(Touch* touch, Event  *event)
+{
+	auto location = touch->getLocation();
+
+	auto s = getChildByName("sprite18");
+	s->runAction(MoveTo::create(1, Vec2(location.x, location.y)));
+	return;
 }
 
 
