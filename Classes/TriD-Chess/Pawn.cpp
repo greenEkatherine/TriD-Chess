@@ -2,7 +2,7 @@
 
 Pawn::Pawn(Colours col,Position position2D )
 {
-	colour = col;
+/*	colour = col;
 	if (colour == WHITE) {
 		if (position2D.getLetter() == 'z' || position2D.getLetter() == 'a') {
 			Position3D position(position2D, 0);
@@ -24,7 +24,7 @@ Pawn::Pawn(Colours col,Position position2D )
 		{
 			Position3D position(position2D, 5);
 		}
-	}
+	}*/
 }
 
 void Pawn::isValidMove(size_t newx, size_t newy, size_t newz, bool& res, std::unique_ptr<Board> boardState, bool kill)

@@ -2,7 +2,7 @@
 
 Rook::Rook(Colours col,Side sd ) : side(sd)
 {
-	colour = col;
+/*	colour = col;
 	Position position2D;
 	if (colour == WHITE) {
         if (side == L) {
@@ -19,7 +19,7 @@ Rook::Rook(Colours col,Side sd ) : side(sd)
         else if (side == R) {
             position = Position3D(Position('e', 9), 6);
         }
-	}
+	}*/
 };
 
 void Rook::isValidMove(size_t newx, size_t newy, size_t newz, bool& res, std::unique_ptr<Board> boardState, bool kill)

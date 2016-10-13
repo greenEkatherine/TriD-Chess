@@ -2,7 +2,7 @@
 
 Bishop::Bishop(Colours col,Side sd ) : side(sd)
 {
-	colour = col;
+/*	colour = col;
 	if (colour == WHITE) {
 		if (side == L) {
 			position = Position3D(Position('b', 1), 1);
@@ -18,7 +18,7 @@ Bishop::Bishop(Colours col,Side sd ) : side(sd)
 		else if (side == R) {
 			position = Position3D(Position('c', 8), 5);
 		}
-	}
+	}*/
 };
 
 void Bishop::isValidMove(size_t newx, size_t newy, size_t newz, bool& res, std::unique_ptr<Board> boardState, bool kill)

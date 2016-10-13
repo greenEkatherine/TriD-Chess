@@ -2,14 +2,14 @@
 
 Queen::Queen(Colours col )
 {
-	colour = col;
+/*	colour = col;
 	Position position2D;
 	if (colour == WHITE) {
 			position = Position3D(Position('a', 0), 0);
 	}
 	else if (colour == BLACK) {
 			position = Position3D(Position('a', 9), 4);
-	}
+	}*/
 }
 
 void Queen::isValidMove(size_t newx, size_t newy, size_t newz, bool& res, std::unique_ptr<Board> boardState, bool kill)

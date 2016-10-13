@@ -4,6 +4,7 @@
 #include <cstdio>
 #include <vector>
 #include <memory>
+#include <cmath>
 #include "Colours.h"
 #include "Position.h"
 #include "Position3D.h"
@@ -20,10 +21,10 @@ protected:
 
 public:
     ChessPiece(){};
-	explicit ChessPiece(Colours col  ) : colour(col), position(Position(), 0){};
+	explicit ChessPiece(Colours col  ) : colour(col){};
 	virtual ~ChessPiece() {};
 	Colours getColour() {return colour};
-	virtual void isValidMove(size_t newx, size_t newy, size_t newz, bool& res, std::unique_ptr<Board> board, bool kill = false) = 0;
-	void setPosition(size_t newx, size_t newy, size_t newz);
+	virtual void isValidMove(int newx, int newy, int newz, bool& res, std::unique_ptr<Board> board, bool kill = false) = 0;
+	void move(int newx, int newy, int newz);
 };
 #endif

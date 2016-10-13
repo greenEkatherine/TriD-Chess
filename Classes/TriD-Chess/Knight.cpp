@@ -2,7 +2,7 @@
 
 Knight::Knight(Colours col,Side sd ) : side(sd)
 {
-	colour = col; 
+/*	colour = col; 
 	if (colour == WHITE) {
 		if (side == L) {
 			position = Position3D(Position('a', 1), 1);
@@ -18,7 +18,7 @@ Knight::Knight(Colours col,Side sd ) : side(sd)
 		else if (side == R) {
 			position = Position3D(Position('d', 8), 5);
 		}
-	}
+	}*/
 };
 
 //size_t make unsigned? Check!

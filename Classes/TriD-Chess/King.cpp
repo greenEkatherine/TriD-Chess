@@ -2,14 +2,14 @@
 
 King::King(Colours col )
 {
-	colour = col;
+/*	colour = col;
 	Position position2D;
 	if (colour == WHITE) {
 		position = Position3D(Position('d', 0), 2);
 	}
 	else if (colour == BLACK) {
 		position = Position3D(Position('d', 9), 6);
-	}
+	}*/
 }
 
 void King::isValidMove(size_t newx, size_t newy, size_t newz, bool& res, std::unique_ptr<Board> boardState, bool kill)

@@ -1,12 +1,6 @@
 #include "ChessPiece.h"
 
-void ChessPiece::getValidMoves()
-{
-	// TODO - implement ChessPiece::getValidMoves
-	throw "Not yet implemented";
-}
-
-void ChessPiece::move(Position newPosition )
+void ChessPiece::move(int newx, int newy, int newz)
 {
 	// TODO - implement ChessPiece::move
 	throw "Not yet implemented";

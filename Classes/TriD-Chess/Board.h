@@ -11,7 +11,7 @@
 class Board
 {
 private:
-	static const SIZE_X = 10;
+	static const SIZE_X = 6;//'a' - 'f'
 	static const SIZE_Y = 10;
 	static const SIZE_Z = 7;
 	std::array<std::array<std::array<STATE, 8>, 8>, 7> gameSpace;
